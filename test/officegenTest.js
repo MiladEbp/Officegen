@@ -12,7 +12,7 @@ describe('officegen', function () {
         var out = fs_1.createWriteStream(dir + fileName);
         docxFile.generate(out);
         out.on('close', function () {
-            console.log('Create file of ' + fileName + ' in directory');
+            console.log('OutPut is : \nCreate file of ' + fileName + ' in directory');
             done();
             return officeGen.Promise = global.Promise;
         });
@@ -26,6 +26,24 @@ describe('officegen', function () {
         docxFile.generate(out);
         out.on('close', function () {
             console.log('Create file of ' + fileName + ' in directory');
+            done();
+            return officeGen.Promise = global.Promise;
+        });
+    });
+    it('Add Table in File', function (done) {
+        var docxFile = officeGen('docx');
+        var table = [[{ val: 'نام', opts: { rtl: true, font_face: 'B Nazanin', color: 'block', shd: { fill: '7F7F7F', themeFill: 'text1', themeFillTint: '10' } } },
+                { val: 'نام خانوادگی', opts: { rtl: true, font_face: 'B Nazanin', color: 'block', shd: { fill: '7F7F7F', themeFill: 'text1', themeFillTint: '80' } } }],
+            [{ val: 'عرفان', opts: { rtl: true, font_face: 'B Nazanin', color: 'red', shd: { fill: '92CDDC', themeFill: 'text1', themeFillTint: '80' } } },
+                { val: 'تاواتاو', opts: { rtl: true, font_face: 'B Nazanin', color: 'red', shd: { fill: '92CDDC', themeFill: 'text1', themeFillTint: '10' } } }]
+        ];
+        var tableStyle = { border: true, rtl: true, align: 'right' };
+        docxFile.createTable(table, tableStyle);
+        var fileName = "table.docx";
+        var out = fs_1.createWriteStream(dir + fileName);
+        docxFile.generate(out);
+        out.on('close', function () {
+            console.log('Create file of ' + fileName + 'in directory');
             done();
             return officeGen.Promise = global.Promise;
         });
